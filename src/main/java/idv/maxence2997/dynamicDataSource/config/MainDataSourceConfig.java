@@ -1,0 +1,28 @@
+package idv.maxence2997.dynamicDataSource.config;
+
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class MainDataSourceConfig {
+  
+  @Bean
+  @ConfigurationProperties(prefix = "spring.dynamic-data-source.main")
+  public DataSourceProperties mainDataSourceProperties() {
+    return new DataSourceProperties();
+  }
+  
+  @Primary
+  @Bean
+  public DataSource mainDataSource(DataSourceProperties mainDataSourceProperties) {
+    return mainDataSourceProperties.initializeDataSourceBuilder()
+                                   .type(HikariDataSource.class)
+                                   .build();
+  }
+}

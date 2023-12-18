@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: dynamic_data_source
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    #    generate-ddl: true
+    properties:
+      hibernate:
+        format_sql: true
+  customized:
+    jdbc-url-post-fix: "useSSL=false&useUnicode=true&characterEncoding=utf-8"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  dynamic-data-source:
+    main:
+      url: jdbc:mysql://localhost:3306/${spring.application.name}?${spring.customized.jdbc-url-post-fix}
+      username: root
+      password: password
+      driverClassName: ${spring.customized.driver-class-name}
+    replica:
+      url: jdbc:mysql://localhost:3307/${spring.application.name}?${spring.customized.jdbc-url-post-fix}
+      username: root
+      password: password
+      driverClassName: ${spring.customized.driver-class-name}
+
+server:
+  port: 8081

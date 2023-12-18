@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql_main:
+    container_name: mysql_main
+    hostname: mysql_main
+    platform: ${MYSQL_PLATFORM}
+    image: mysql/mysql-server:${MYSQL_SERVER_TAG}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    links:
+      - mysql_replica
+    volumes:
+      - ${MYSQL_MAIN_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${MYSQL_MAIN_DIR}/my.cnf:/etc/mysql/my.cnf
+    #      - ./data/mysql:/var/lib/mysql
+    ports:
+      - '${FORWARD_MAIN_MYSQL_PORT:-3306}:3306'
+  mysql_replica:
+    container_name: mysql_replica
+    hostname: mysql_replica
+    platform: ${MYSQL_PLATFORM}
+    image: mysql/mysql-server:${MYSQL_SERVER_TAG}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${MYSQL_REPLICA_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${MYSQL_REPLICA_DIR}/my.cnf:/etc/mysql/my.cnf
+    #      - ./data/mysql:/var/lib/mysql
+    ports:
+      - '${FORWARD_REPLICA_MYSQL_PORT:-3307}:3306'
