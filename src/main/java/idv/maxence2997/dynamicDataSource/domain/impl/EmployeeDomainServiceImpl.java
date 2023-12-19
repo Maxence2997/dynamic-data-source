@@ -7,11 +7,13 @@ import idv.maxence2997.dynamicDataSource.entity.Employee;
 import idv.maxence2997.dynamicDataSource.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 public class EmployeeDomainServiceImpl implements EmployeeDomainService {
   
   private final EmployeeRepository employeeRepository;

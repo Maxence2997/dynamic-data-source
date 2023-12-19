@@ -17,13 +17,16 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Method;
 
 @Slf4j
-@Component
-@Role(BeanDefinition.ROLE_INFRASTRUCTURE) // specify that this class should not be proxy.
+//@Component
+@Role(BeanDefinition.ROLE_INFRASTRUCTURE) // specify that this class should not be proxied.
 public class DataSourceSelectorAdvisor extends AbstractBeanFactoryPointcutAdvisor {
   
   /**
-   * Let it scan the target classes be proxied for jpa repository interface.
+   * Choose one to use between this and DataSourceSelectorAspect.java.
+   * This will scan all the method during application startup time.
    */
+  
+  //Let it scan the target classes be proxied for jpa repository interface.
   private static final String JDK_PROXY_CLASS_KEYWORD = "jdk.proxy";
   private final Advice advice = new DataSourceSelectorInterceptor();
   private final StaticMethodMatcherPointcut pointcut = new StaticMethodMatcherPointcut() {

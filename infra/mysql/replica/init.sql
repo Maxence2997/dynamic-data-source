@@ -1,6 +1,6 @@
 CREATE USER 'root'@'%' IDENTIFIED BY 'root';
-# GRANT SELECT, SHOW VIEW, SHOW DATABASES, REPLICATION CLIENT, PROCESS ON *.* TO 'root'@'%';
-GRANT ALL ON *.* TO 'root'@'%';
+GRANT SELECT, SHOW VIEW, SHOW DATABASES, REPLICATION CLIENT, PROCESS ON *.* TO 'root'@'%';
+# GRANT ALL ON *.* TO 'root'@'%';  # only used for testing
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
 FLUSH PRIVILEGES;
 CREATE DATABASE dynamic_data_source CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -10,8 +10,7 @@ CHANGE MASTER TO
     MASTER_USER ='replica',
     MASTER_PASSWORD ='replica',
     MASTER_LOG_FILE ='replicas-mysql-bin.000003', -- File文件名
-    MASTER_LOG_POS = 156;
--- binlog记录位置
+    MASTER_LOG_POS = 156; -- binlog记录位置
 
 # ALL: This would allow a MySQL user all access
 # ALL PRIVILEGES : This would allow a MySQL user all access

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>idv.maxence2997</groupId>
-	<artifactId>dynamic-data-source-learning</artifactId>
+	<artifactId>dynamic-data-source</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>db-separation-learning</name>
 	<description>Demo project for Spring Boot</description>
