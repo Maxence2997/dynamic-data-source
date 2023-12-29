@@ -30,10 +30,11 @@ public class DataSourceSelectorAspect {
     MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
     DataSourceSelector dataSourceSelector = AnnotationUtils.getAnnotation(methodSignature.getMethod(),
                                                                           DataSourceSelector.class);
-    log.info("matched method for @DataSourceSelector, method: {}, targetClass: {}", methodSignature.getMethod(),
-             proceedingJoinPoint.getTarget());
+    log.info("matched method for @DataSourceSelector, method: {}, targetClass: {}",
+             methodSignature.getMethod(), proceedingJoinPoint.getTarget());
     try {
       assert dataSourceSelector != null;
+      log.info("data source: {}", dataSourceSelector.value());
       DatabaseContextHolder.setDatabaseContextHolder(dataSourceSelector.value());
       return proceedingJoinPoint.proceed();
     } finally {

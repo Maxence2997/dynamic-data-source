@@ -1,10 +1,7 @@
 package idv.maxence2997.dynamicDataSource.service.impl;
 
-import idv.maxence2997.dynamicDataSource.config.DataSourceEnum;
-import idv.maxence2997.dynamicDataSource.config.aspect.DataSourceSelector;
 import idv.maxence2997.dynamicDataSource.domain.EmployeeDomainService;
-import idv.maxence2997.dynamicDataSource.entity.Employee;
-import idv.maxence2997.dynamicDataSource.repository.EmployeeRepository;
+import idv.maxence2997.dynamicDataSource.entity.mysql.Employee;
 import idv.maxence2997.dynamicDataSource.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

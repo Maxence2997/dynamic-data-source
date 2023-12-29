@@ -9,21 +9,38 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  customized:
-    jdbc-url-post-fix: "useSSL=false&useUnicode=true&characterEncoding=utf-8"
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
   dynamic-data-source:
-    main:
-      url: jdbc:mysql://localhost:3306/${spring.application.name}?${spring.customized.jdbc-url-post-fix}
-      username: root
-      password: password
-      driverClassName: ${spring.customized.driver-class-name}
-    replica:
-      url: jdbc:mysql://localhost:3307/${spring.application.name}?${spring.customized.jdbc-url-post-fix}
-      username: root
-      password: password
-      driverClassName: ${spring.customized.driver-class-name}
+    jdbc-url-post-fix: "useSSL=false&useUnicode=true&characterEncoding=utf-8"
+    mysql:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      host: localhost
+      main:
+        host: ${spring.dynamic-data-source.mysql.host}
+        url: jdbc:mysql://${spring.dynamic-data-source.mysql.main.host}:3306/${spring.application.name}?${spring.dynamic-data-source.jdbc-url-post-fix}
+        username: root
+        password: password
+        driverClassName: ${spring.dynamic-data-source.mysql.driver-class-name}
+      replica:
+        host: ${spring.dynamic-data-source.mysql.host}
+        url: jdbc:mysql://${spring.dynamic-data-source.mysql.replica.host}:3307/${spring.application.name}?${spring.dynamic-data-source.jdbc-url-post-fix}
+        username: root
+        password: password
+        driverClassName: ${spring.dynamic-data-source.mysql.driver-class-name}
+    postgresql:
+      driver-class-name: org.postgresql.Driver
+      host: localhost
+      main:
+        host: ${spring.dynamic-data-source.postgresql.host}
+        url: jdbc:postgresql://${spring.dynamic-data-source.postgresql.main.host}:5432/${spring.application.name}?
+        username: postgres
+        password: password
+        driverClassName: ${spring.dynamic-data-source.postgresql.driver-class-name}
+      replica:
+        host: ${spring.dynamic-data-source.postgresql.host}
+        url: jdbc:postgresql://${spring.dynamic-data-source.postgresql.replica.host}:5433/${spring.application.name}?
+        username: postgres
+        password: password
+        driverClassName: ${spring.dynamic-data-source.postgresql.driver-class-name}
 
 server:
   port: 8081

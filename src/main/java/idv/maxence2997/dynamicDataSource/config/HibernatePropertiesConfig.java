@@ -13,13 +13,14 @@ import java.util.function.Supplier;
 
 @Configuration
 public class HibernatePropertiesConfig {
-  
+
   private static final String HIBERNATE_DDL_AUTO_DEFAULT = "none";
   private static final String HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
   
-  @Bean("hibernateProperties")
-  public Properties hibernateProperties(HibernateProperties hibernateProperties, JpaProperties jpaProperties) {
-    
+  @Bean(Constant.HIBERNATE_PROPERTIES)
+  public Properties hibernateProperties(HibernateProperties hibernateProperties,
+                                        JpaProperties jpaProperties) {
+
     Properties properties = new Properties();
     
     this.applyStrategy(properties,

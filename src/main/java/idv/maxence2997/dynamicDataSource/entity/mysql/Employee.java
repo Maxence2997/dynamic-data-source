@@ -1,4 +1,4 @@
-package idv.maxence2997.dynamicDataSource.entity;
+package idv.maxence2997.dynamicDataSource.entity.mysql;
 
 import jakarta.persistence.*;
 import lombok.Data;

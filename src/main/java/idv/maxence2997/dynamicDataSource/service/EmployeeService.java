@@ -1,6 +1,6 @@
 package idv.maxence2997.dynamicDataSource.service;
 
-import idv.maxence2997.dynamicDataSource.entity.Employee;
+import idv.maxence2997.dynamicDataSource.entity.mysql.Employee;
 
 public interface EmployeeService {
   

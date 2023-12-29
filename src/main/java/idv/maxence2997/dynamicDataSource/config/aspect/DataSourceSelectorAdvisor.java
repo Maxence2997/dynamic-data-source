@@ -1,6 +1,6 @@
 package idv.maxence2997.dynamicDataSource.config.aspect;
 
-import idv.maxence2997.dynamicDataSource.config.Constants;
+import idv.maxence2997.dynamicDataSource.config.Constant;
 import idv.maxence2997.dynamicDataSource.config.DatabaseContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.aop.Advice;
@@ -12,7 +12,6 @@ import org.springframework.aop.support.StaticMethodMatcherPointcut;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.annotation.AnnotatedElementUtils;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -35,7 +34,7 @@ public class DataSourceSelectorAdvisor extends AbstractBeanFactoryPointcutAdviso
       
       boolean hasAnnotation = false;
       String className = targetClass.getName();
-      if (className.startsWith(Constants.BASE_PACKAGE_DIR) || className.contains(JDK_PROXY_CLASS_KEYWORD)) {
+      if (className.startsWith(Constant.BASE_PACKAGE_DIR) || className.contains(JDK_PROXY_CLASS_KEYWORD)) {
         // 直接使用spring工具包，来获取method上的注解（会找父类上的注解）
         hasAnnotation = AnnotatedElementUtils.hasAnnotation(method, DataSourceSelector.class);
         if (hasAnnotation) {
