@@ -8,8 +8,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ${MYSQL_MAIN_DIR}/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ${MYSQL_MAIN_DIR}/conf/my.cnf:/etc/mysql/my.cnf
+      - ${MYSQL_MAIN_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${MYSQL_MAIN_DIR}/my.cnf:/etc/mysql/my.cnf
       - mysql-main-data-volume:/var/lib/mysql
     ports:
       - '${FORWARD_MAIN_MYSQL_PORT:-3306}:3306'
@@ -29,8 +29,8 @@ services:
     depends_on:
       - mysql_main
     volumes:
-      - ${MYSQL_REPLICA_DIR}/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ${MYSQL_REPLICA_DIR}/conf/my.cnf:/etc/mysql/my.cnf
+      - ${MYSQL_REPLICA_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${MYSQL_REPLICA_DIR}/my.cnf:/etc/mysql/my.cnf
       - mysql-replica-data-volume:/var/lib/mysql
     ports:
       - '${FORWARD_REPLICA_MYSQL_PORT:-3306}:3306'
@@ -54,7 +54,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DATABASE: ${POSTGRES_DB}
     volumes:
-      - ${POSTGRES_MAIN_DIR}/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${POSTGRES_MAIN_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-main-data-volume:/var/lib/postgresql/data
     ports:
       - '${FORWARD_MAIN_POSTGRES_PORT:-5432}:5432'
@@ -82,7 +82,7 @@ services:
     depends_on:
       - postgres_main
     volumes:
-      - ${POSTGRES_REPLICA_DIR}/conf/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${POSTGRES_REPLICA_DIR}/init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres-replica-data-volume:/var/lib/postgresql/data
     ports:
       - '${FORWARD_REPLICA_POSTGRES_PORT:-5432}:5432'
